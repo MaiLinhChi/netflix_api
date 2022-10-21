@@ -4,10 +4,10 @@ const movieRoute = require("../routes/movie.route");
 const listRoute = require("../routes/list.route");
 
 const routes = (app) => {
-    app.use("/api/auth", authRoute);
-    app.use("/api/users", userRoute);
-    app.use("/api/movies", movieRoute);
-    app.use("/api/lists", listRoute);
+  app.use("/auth", authRoute);
+  app.use("/users", userRoute);
+  app.use("/movies", movieRoute);
+  app.use("/lists", listRoute);
 };
 
 module.exports = routes;

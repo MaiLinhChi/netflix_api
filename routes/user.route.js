@@ -5,39 +5,15 @@ const User = require("../models/User.model");
 
 // Middleware
 const verifyToken = require("../middlewares/verifyToken.middleware");
+var ObjectID = require("mongodb").ObjectID;
 
-// GET
-router.get("/find/:id", async (req, res) => {
-  try {
-    const user = await User.findById(req.params.id);
-    const { password, ...info } = user._doc;
-    res.status(200).json(info);
-  } catch (error) {
-    res.status(500).json(error);
-  }
-});
 // GET ALL
 router.get("/", verifyToken, async (req, res) => {
-  const isNew = req.query.new === "true" ? true : false;
-  if (req.user.isAdmin) {
-    try {
-      const users = isNew
-        ? await User.aggregate([
-            {
-              $unset: "password",
-            },
-          ]).limit(4)
-        : await User.aggregate([
-            {
-              $unset: "password",
-            },
-          ]);
-      res.status(200).json(users);
-    } catch (error) {
-      res.status(500).json(error);
-    }
-  } else {
-    res.status(403).json("You are not allowed to see all users!!!");
+  try {
+    const users = await User.find().sort({ _id: -1 });
+    res.status(200).json(users);
+  } catch (error) {
+    res.status(500).json(error);
   }
 });
 // GET USER STATS CREATE AT
@@ -96,6 +72,20 @@ router.get("/stats", verifyToken, async (req, res) => {
     }));
 
     res.status(200).json(data);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+});
+
+// GET
+router.get("/find/:id", verifyToken, async (req, res) => {
+  try {
+    if (!ObjectID.isValid(req.params.id))
+      return res.status(401).json("Id is not valid");
+    const user = await User.findById(req.params.id);
+    if (!user) return res.status(404).json("User not found");
+    const { password, ...info } = user._doc;
+    res.status(200).json(info);
   } catch (error) {
     res.status(500).json(error);
   }

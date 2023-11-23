@@ -8,6 +8,11 @@ const router = express.Router();
 
 router.post("/register", async (req, res) => {
   try {
+    const emailOrPhoneExisted = User.findOne({
+      $or: [{ email: req.body.email }, { phone: req.body.email }],
+    });
+    if (emailOrPhoneExisted)
+      return res.status(401).json("Email or phone already existed.");
     const user = await User.create({
       name: req.body.name,
       email: req.body.email,
@@ -23,13 +28,13 @@ router.post("/register", async (req, res) => {
 router.post("/login", async (req, res) => {
   try {
     const user = await User.findOne({ email: req.body.email });
-    !user && res.status(401).json("Email doen't exiting!!!");
+    if (!user) return res.status(401).json("Email doen't exiting!!!");
 
     const bytes = CryptoJS.AES.decrypt(user.password, process.env.SECRET_KEY);
     const originalText = bytes.toString(CryptoJS.enc.Utf8);
 
-    originalText !== req.body.password &&
-      res.status(401).json("Wrong password!!!");
+    if (originalText !== req.body.password)
+      return res.status(401).json("Wrong password!!!");
 
     const accessToken = jwt.sign(
       { id: user._id, isAdmin: user.isAdmin },

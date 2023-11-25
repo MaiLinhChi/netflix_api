@@ -1,4 +1,4 @@
-const userSwagger = {
+const usersSwagger = {
   "/users": {
     get: {
       tags: ["Users"],
@@ -86,10 +86,81 @@ const userSwagger = {
       },
     },
   },
-  "/users/{id}": {
+  "/users/create": {
+    post: {
+      tags: ["Users"],
+      description: "Create user",
+      parameters: [
+        {
+          name: "token",
+          in: "header",
+          description: "Token to be passed as a header",
+          required: true,
+          schema: {
+            type: "string",
+          },
+          example: "Bearer ",
+        },
+      ],
+      requestBody: {
+        content: {
+          "application/json": {
+            schema: {
+              type: "object",
+              properties: {
+                name: {
+                  description: "Name of the user",
+                  type: "string",
+                },
+                phone: {
+                  description: "Phone of the user",
+                  type: "string",
+                },
+                email: {
+                  description: "Email of the user",
+                  type: "string",
+                  example: "string@gmail.com",
+                },
+                job: {
+                  description: "job of the user",
+                  type: "string",
+                },
+                address: {
+                  description: "address of the user",
+                  type: "string",
+                },
+                profilePicture: {
+                  description: "Profile picture of the user",
+                  type: "string",
+                },
+                role: {
+                  description: "address of the user",
+                  type: "string",
+                },
+                password: {
+                  description: "Password of the user",
+                  type: "string",
+                },
+              },
+              required: ["name", "email", "password", "phone"],
+            },
+          },
+        },
+      },
+      responses: {
+        200: {
+          description: "Create user successfully",
+          content: {
+            "application/json": {},
+          },
+        },
+      },
+    },
+  },
+  "/users/update/{id}": {
     patch: {
       tags: ["Users"],
-      description: "Update users by id",
+      description: "Update user",
       parameters: [
         {
           name: "token",
@@ -104,16 +175,61 @@ const userSwagger = {
         {
           name: "id",
           in: "path",
-          description: "Id to be update user",
+          description: "Id of user",
           required: true,
           schema: {
             type: "string",
           },
         },
       ],
+      requestBody: {
+        content: {
+          "application/json": {
+            schema: {
+              type: "object",
+              properties: {
+                name: {
+                  description: "Name of the user",
+                  type: "string",
+                },
+                phone: {
+                  description: "Phone of the user",
+                  type: "string",
+                },
+                email: {
+                  description: "Email of the user",
+                  type: "string",
+                  example: "string@gmail.com",
+                },
+                job: {
+                  description: "job of the user",
+                  type: "string",
+                },
+                address: {
+                  description: "address of the user",
+                  type: "string",
+                },
+                profilePicture: {
+                  description: "Profile picture of the user",
+                  type: "string",
+                },
+                role: {
+                  description: "address of the user",
+                  type: "string",
+                },
+                password: {
+                  description: "Password of the user",
+                  type: "string",
+                },
+              },
+              required: ["name", "email", "password", "phone"],
+            },
+          },
+        },
+      },
       responses: {
         200: {
-          description: "Update user by id successfully",
+          description: "Update user successfully",
           content: {
             "application/json": {},
           },
@@ -158,4 +274,4 @@ const userSwagger = {
   },
 };
 
-module.exports = userSwagger;
+module.exports = usersSwagger;

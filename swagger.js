@@ -1,33 +1,34 @@
 const swaggerJsdoc = require("swagger-jsdoc");
 const { getFileNames } = require("./utils/file");
 const authSwagger = require("./swagger/auth");
-const userSwagger = require("./swagger/users");
+const usersSwagger = require("./swagger/users");
+const moviesSwagger = require("./swagger/moves");
+const listsSwagger = require("./swagger/lists");
+const package = require("./package.json");
 
 const options = {
   definition: {
     openapi: "3.0.0",
     info: {
-      title: "Netflix api",
-      version: "1.0.0",
-      description: "Netflix movies....",
+      title: package.name,
+      version: package.version,
+      description: package.description,
     },
     servers: [
       {
-        url: "http://localhost:9000",
-        description: "Dev",
-      },
-      {
-        url: "http://localhost:9000",
-        description: "Build",
+        url: `${process.env.HOST}${process.env.PORT}`,
+        description: process.env.ENVIRONMENT,
       },
     ],
     tags: getFileNames(`${__dirname}/swagger`),
     paths: {
       ...authSwagger,
-      ...userSwagger,
+      ...usersSwagger,
+      ...moviesSwagger,
+      ...listsSwagger,
     },
   },
-  apis: ["./routes/*.route.js"],
+  apis: ["./routes/*.js"],
 };
 
 module.exports = swaggerJsdoc(options);

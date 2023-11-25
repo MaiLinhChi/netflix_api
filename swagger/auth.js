@@ -13,9 +13,14 @@ const authSwagger = {
                   description: "Name of the user",
                   type: "string",
                 },
+                phone: {
+                  description: "Phone of the user",
+                  type: "string",
+                },
                 email: {
                   description: "Email of the user",
                   type: "string",
+                  example: "string@gmail.com",
                 },
                 password: {
                   description: "Password of the user",
@@ -51,6 +56,7 @@ const authSwagger = {
                 email: {
                   description: "Email of the user",
                   type: "string",
+                  example: "string@gmail.com",
                 },
                 password: {
                   description: "Password of the user",

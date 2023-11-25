@@ -10,7 +10,6 @@ const PORT = process.env.PORT || 8000;
 const connectDb = require("./db/db");
 const routes = require("./routes");
 const swaggerDocument = require("./swagger");
-const configs = require("./configs");
 // Use middleware
 app.use(express.json());
 app.use(cors());
@@ -22,7 +21,15 @@ connectDb();
 routes(app);
 
 // Swagger
-app.use("/documentation", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+var options = {
+  customSiteTitle: "Netflix api",
+  customfavIcon: "./assets/favicon.ico",
+};
+app.use(
+  "/documentation",
+  swaggerUi.serve,
+  swaggerUi.setup(swaggerDocument, options)
+);
 
 app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`);

@@ -40,6 +40,14 @@ const moviesSwagger = {
           example: "movies",
         },
         {
+          name: "id",
+          in: "query",
+          description: "Id of movies",
+          schema: {
+            type: "string",
+          },
+        },
+        {
           name: "genre",
           in: "query",
           description: "Genre of movies",

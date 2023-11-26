@@ -11,6 +11,7 @@ const search = Joi.object({
 const suggest = Joi.object({
   type: Joi.string().min(1).optional(),
   genre: Joi.string().min(1).optional(),
+  id: Joi.string().required(),
 });
 
 const create = Joi.object({

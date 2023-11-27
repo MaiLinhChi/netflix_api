@@ -6,6 +6,7 @@ const Validator = require("../middlewares/validation");
 
 const Movies = require("../controllers/movies");
 const moviesSchema = require("../validation/movies");
+const authorization = require("../middlewares/authorization");
 
 // GET ALL
 router.get("/", verifyToken, Movies.getAll);
@@ -27,6 +28,7 @@ router.post(
   "/create",
   verifyToken,
   Validator(moviesSchema.create),
+  authorization(["admin", "manager"]),
   Movies.create
 );
 
@@ -35,10 +37,16 @@ router.patch(
   "/update/:id",
   verifyToken,
   Validator(moviesSchema.update),
+  authorization(["admin", "manager"]),
   Movies.update
 );
 
 // DELETE
-router.delete("/:id", verifyToken, Movies.delete);
+router.delete(
+  "/:id",
+  verifyToken,
+  authorization(["admin", "manager"]),
+  Movies.delete
+);
 
 module.exports = router;

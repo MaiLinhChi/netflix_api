@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 
+const configs = require("../configs");
+
 const UserSchema = new mongoose.Schema(
   {
     name: { type: String, required: true },
@@ -7,12 +9,15 @@ const UserSchema = new mongoose.Schema(
     phone: { type: String, required: true, unique: true },
     job: { type: String },
     address: { type: String },
-    profilePicture: { type: String, default: "" },
+    profilePicture: {
+      type: String,
+      default: process.env.IMAGE_USER_DEFAULT,
+    },
     password: { type: String, required: true },
     role: {
       type: String,
       default: "guest",
-      enum: ["admin", "manager", "guest"],
+      enum: configs.roles,
     },
   },
   {

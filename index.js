@@ -10,6 +10,8 @@ const PORT = process.env.PORT || 8000;
 const connectDb = require("./db/db");
 const routes = require("./routes");
 const swaggerDocument = require("./swagger");
+require("./utils/connect_redis");
+
 // Use middleware
 app.use(express.json());
 app.use(cors());

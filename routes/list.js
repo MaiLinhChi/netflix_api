@@ -1,6 +1,6 @@
 const router = require("express").Router();
 // Middleware
-const verifyToken = require("../middlewares/verifyToken");
+const { verifyAccessToken } = require("../middlewares/verifyToken");
 
 const Lists = require("../controllers/lists");
 const Validator = require("../middlewares/validation");
@@ -13,7 +13,7 @@ router.get("/", Validator(listsSchema.getAll), Lists.getAll);
 // CREATE
 router.post(
   "/create",
-  verifyToken,
+  verifyAccessToken,
   Validator(listsSchema.create),
   authorization(["admin", "manager"]),
   Lists.create
@@ -22,7 +22,7 @@ router.post(
 // UPDATE
 router.patch(
   "/update/:id",
-  verifyToken,
+  verifyAccessToken,
   Validator(listsSchema.update),
   authorization(["admin", "manager"]),
   Lists.update
@@ -31,7 +31,7 @@ router.patch(
 // DELETE
 router.delete(
   "/:id",
-  verifyToken,
+  verifyAccessToken,
   authorization(["admin", "manager"]),
   Lists.delete
 );

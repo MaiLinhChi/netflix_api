@@ -1,7 +1,7 @@
 const router = require("express").Router();
 
 // Middleware
-const verifyToken = require("../middlewares/verifyToken");
+const { verifyAccessToken } = require("../middlewares/verifyToken");
 const Validator = require("../middlewares/validation");
 
 const Movies = require("../controllers/movies");
@@ -9,7 +9,7 @@ const moviesSchema = require("../validation/movies");
 const authorization = require("../middlewares/authorization");
 
 // GET ALL
-router.get("/", verifyToken, Movies.getAll);
+router.get("/", verifyAccessToken, Movies.getAll);
 
 // GET SUGGESTEDS
 router.get("/suggesteds", Validator(moviesSchema.suggest), Movies.suggest);
@@ -26,7 +26,7 @@ router.get("/random", Validator(moviesSchema.random), Movies.random);
 // CREATE
 router.post(
   "/create",
-  verifyToken,
+  verifyAccessToken,
   Validator(moviesSchema.create),
   authorization(["admin", "manager"]),
   Movies.create
@@ -35,7 +35,7 @@ router.post(
 // UPDATE
 router.patch(
   "/update/:id",
-  verifyToken,
+  verifyAccessToken,
   Validator(moviesSchema.update),
   authorization(["admin", "manager"]),
   Movies.update
@@ -44,7 +44,7 @@ router.patch(
 // DELETE
 router.delete(
   "/:id",
-  verifyToken,
+  verifyAccessToken,
   authorization(["admin", "manager"]),
   Movies.delete
 );

@@ -78,6 +78,36 @@ const authSwagger = {
       },
     },
   },
+  "/auth/refresh_token": {
+    post: {
+      tags: ["Auth"],
+      description: "Refresh token for access",
+      requestBody: {
+        content: {
+          "application/json": {
+            schema: {
+              type: "object",
+              properties: {
+                refreshToken: {
+                  description: "Refresh token of the user",
+                  type: "string",
+                },
+              },
+              required: ["name", "email", "password"],
+            },
+          },
+        },
+      },
+      responses: {
+        200: {
+          description: "Refresh token successfully",
+          content: {
+            "application/json": {},
+          },
+        },
+      },
+    },
+  },
 };
 
 module.exports = authSwagger;

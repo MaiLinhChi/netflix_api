@@ -78,27 +78,19 @@ module.exports = {
 
   getById: async (req, res) => {
     try {
-      if (!isObjectId(req.params.id))
-        return res.status(400).json("Id is not valid");
+      isObjectId(req.params.id);
       const user = await User.findById(req.params.id);
       if (!user) return res.status(404).json("User not found");
       const { password, ...info } = user._doc;
       return res.status(200).json(info);
     } catch (error) {
-      return res.status(500).json(error);
+      return res.status(error.status || 500).json(error);
     }
   },
 
   create: async (req, res) => {
     const fieldList = ["phone", "email"];
-    const document = await checkDocumentExistWithFields(
-      User,
-      null,
-      fieldList,
-      req
-    );
-    if (document)
-      return res.status(400).json("Email or phone already existed.");
+    await checkDocumentExistWithFields(User, null, fieldList, req);
     if (req.body.password) {
       req.body.password = CryptoJS.AES.encrypt(
         req.body.password,
@@ -110,22 +102,15 @@ module.exports = {
       const createdUser = await User.create(req.body);
       return res.status(200).json(createdUser);
     } catch (error) {
-      return res.status(500).json(error);
+      return res.status(error.status || 500).json(error);
     }
   },
 
   updateById: async (req, res) => {
-    if (!isObjectId(req.params.id))
-      return res.status(400).json("Id is not valid");
+    isObjectId(req.params.id);
     const fieldList = ["phone", "email"];
-    const emailOrPhoneExisted = await checkDocumentExistWithFields(
-      User,
-      req.params.id,
-      fieldList,
-      req
-    );
-    if (emailOrPhoneExisted)
-      return res.status(400).json("Email or phone already existed.");
+    await checkDocumentExistWithFields(User, req.params.id, fieldList, req);
+
     if (req.body.password) {
       req.body.password = CryptoJS.AES.encrypt(
         req.body.password,
@@ -144,19 +129,18 @@ module.exports = {
       );
       return res.status(200).json(updateUser);
     } catch (error) {
-      return res.status(500).json(error);
+      return res.status(error.status || 500).json(error);
     }
   },
 
   deleteById: async (req, res) => {
     try {
-      if (!isObjectId(req.params.id))
-        return res.status(400).json("Id is not valid");
+      isObjectId(req.params.id);
       const user = await User.findByIdAndDelete(req.params.id);
       if (!user) return res.status(404).json("User id not existed.");
       return res.status(200).json("User has been deleted...");
     } catch (error) {
-      return res.status(500).json(error);
+      return res.status(error.status || 500).json(error);
     }
   },
 };

@@ -74,25 +74,18 @@ module.exports = {
   },
   create: async (req, res) => {
     const fieldList = ["title"];
-    const document = await checkDocumentExistWithFields(
-      Movie,
-      null,
-      fieldList,
-      req
-    );
-    if (document) return res.status(400).json("Title already existed.");
+    await checkDocumentExistWithFields(Movie, null, fieldList, req);
     const newMovie = new Movie(req.body);
     try {
       const savedMovie = await newMovie.save();
       return res.status(201).json(savedMovie);
     } catch (error) {
-      return res.status(500).json(error);
+      return res.status(error.status || 500).json(error);
     }
   },
   update: async (req, res) => {
-    if (!isObjectId(req.params.id))
-      return res.status(400).json("Id is not valid");
     try {
+      isObjectId(req.params.id);
       const updatedMovie = await Movie.findByIdAndUpdate(
         req.params.id,
         {
@@ -105,18 +98,17 @@ module.exports = {
         ? res.status(200).json(updatedMovie)
         : res.status(404).json("Movie not found");
     } catch (error) {
-      return res.status(500).json(error);
+      return res.status(error.status || 500).json(error);
     }
   },
   delete: async (req, res) => {
-    if (!isObjectId(req.params.id))
-      return res.status(400).json("Id is not valid");
     try {
+      isObjectId(req.params.id);
       const movieDeleted = await Movie.findByIdAndDelete(req.params.id);
       if (!movieDeleted) return res.status(404).json("Movie not found");
       return res.status(200).json(movieDeleted);
     } catch (error) {
-      return res.status(500).json(error);
+      return res.status(error.status || 500).json(error);
     }
   },
 };

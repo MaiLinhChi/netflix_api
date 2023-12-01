@@ -27,35 +27,21 @@ module.exports = {
     }
   },
   create: async (req, res) => {
-    const listFields = ["title"];
-    const document = await checkDocumentExistWithFields(
-      List,
-      null,
-      listFields,
-      req
-    );
-    if (document) return res.status(400).json("Title already existed.");
-    const newList = new List(req.body);
-
     try {
+      const listFields = ["title"];
+      await checkDocumentExistWithFields(List, null, listFields, req);
+      const newList = new List(req.body);
       const savedList = await newList.save();
       return res.status(201).json(savedList);
     } catch (error) {
-      return res.status(500).json(error);
+      return res.status(error.status || 500).json(error);
     }
   },
   update: async (req, res) => {
-    if (!isObjectId(req.params.id))
-      return res.status(400).json("Id is not valid");
-    const listFields = ["title"];
-    const document = await checkDocumentExistWithFields(
-      List,
-      req.params.id,
-      listFields,
-      req
-    );
-    if (document) return res.status(400).json("Title already existed.");
     try {
+      isObjectId(req.params.id);
+      const listFields = ["title"];
+      await checkDocumentExistWithFields(List, req.params.id, listFields, req);
       const updated = await List.findByIdAndUpdate(
         req.params.id,
         {
@@ -67,19 +53,18 @@ module.exports = {
         ? res.status(200).json(updated)
         : res.status(404).json("List not found");
     } catch (error) {
-      return res.status(500).json(error);
+      return res.status(error.status || 500).json(error);
     }
   },
   delete: async (req, res) => {
-    if (!isObjectId(req.params.id))
-      return res.status(400).json("Id is not valid");
     try {
+      isObjectId(req.params.id);
       const deleted = await List.findByIdAndDelete(req.params.id);
       return deleted
         ? res.status(200).json(deleted)
         : res.status(404).json("List not found");
     } catch (error) {
-      return res.status(500).json(error);
+      return res.status(error.status || 500).json(error);
     }
   },
 };

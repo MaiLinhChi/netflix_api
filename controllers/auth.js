@@ -10,13 +10,7 @@ module.exports = {
   register: async (req, res) => {
     try {
       const listFields = ["email"];
-      const document = await checkDocumentExistWithFields(
-        User,
-        null,
-        listFields,
-        req
-      );
-      if (document) return res.status(400).json("Email already existed.");
+      await checkDocumentExistWithFields(User, null, listFields, req);
       const user = await User.create({
         name: req.body.name,
         email: req.body.email,
@@ -29,7 +23,7 @@ module.exports = {
       const { password, ...data } = user._doc;
       res.status(201).json(data);
     } catch (error) {
-      res.status(500).json(error);
+      res.status(error.status || 500).json(error);
     }
   },
   login: async (req, res) => {

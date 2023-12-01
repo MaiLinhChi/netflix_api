@@ -1,10 +1,10 @@
 const CryptoJS = require("crypto-js");
 
 const User = require("../models/User");
-const { signAccessToken, signRtAndSaveRedis } = require("../utils/signToken");
-const { verifyRefreshToken } = require("../middlewares/verifyToken");
+const { signAccessToken, signRtAndSaveDb } = require("../utils/signToken");
+const { verifyAndDeleteRefreshToken } = require("../middlewares/verifyToken");
 const { checkDocumentExistWithFields } = require("../utils/checkParameter");
-const { exAccessTokenRedis, exRefreshTokenRedis } = require("../configs");
+const { exRefreshTokenCookies, exAccessTokenCookies } = require("../configs");
 
 module.exports = {
   register: async (req, res) => {
@@ -42,18 +42,18 @@ module.exports = {
         return res.status(400).json("Wrong password!!!");
 
       const accessToken = signAccessToken(user);
-      const refreshToken = await signRtAndSaveRedis(user);
+      const refreshToken = await signRtAndSaveDb(user);
 
       const { password, ...info } = user._doc;
 
       res
         .status(200)
         .cookie("access_token", "Bearer " + accessToken, {
-          maxAge: exAccessTokenRedis,
+          maxAge: exAccessTokenCookies,
           httpOnly: true,
         })
         .cookie("refresh_token", "Bearer " + refreshToken, {
-          maxAge: exRefreshTokenRedis,
+          maxAge: exRefreshTokenCookies,
           httpOnly: true,
         })
         .json({ ...info, accessToken, refreshToken });
@@ -62,20 +62,26 @@ module.exports = {
     }
   },
   refreshToken: async (req, res) => {
-    const user = await verifyRefreshToken(req, res);
-    const newAccessToken = signAccessToken(user);
-    const newRefreshToken = await signRtAndSaveRedis(user);
-
-    return res
-      .status(200)
-      .cookie("access_token", "Bearer " + newAccessToken, {
-        maxAge: exAccessTokenRedis,
-        httpOnly: true,
-      })
-      .cookie("refresh_token", "Bearer " + newRefreshToken, {
-        maxAge: exRefreshTokenRedis,
-        httpOnly: true,
-      })
-      .json({ newAccessToken, newRefreshToken });
+    try {
+      const user = await verifyAndDeleteRefreshToken(req, res);
+      const newRefreshToken = await signRtAndSaveDb(user);
+      const newAccessToken = signAccessToken(user);
+      return res
+        .status(200)
+        .cookie("access_token", "Bearer " + newAccessToken, {
+          maxAge: exAccessTokenCookies,
+          httpOnly: true,
+        })
+        .cookie("refresh_token", "Bearer " + newRefreshToken, {
+          maxAge: exRefreshTokenCookies,
+          httpOnly: true,
+        })
+        .json({ newAccessToken, newRefreshToken });
+    } catch (error) {
+      if (error.name === "TokenExpiredError") {
+        return res.status(401).json(error);
+      }
+      return res.status(500).json(error);
+    }
   },
 };

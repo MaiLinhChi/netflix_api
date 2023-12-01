@@ -4,9 +4,10 @@ const createError = require("http-errors");
 const {
   expiredInAccessToken,
   expiredInRefreshToken,
-  exRefreshTokenRedis,
+  exRefreshTokenCookies,
 } = require("../configs");
-const clientRedis = require("../utils/connect_redis");
+const RefreshToken = require("../models/RefreshToken");
+// const clientRedis = require("../utils/connect_redis");
 
 module.exports = {
   signAccessToken: (user) => {
@@ -18,22 +19,23 @@ module.exports = {
       expiresIn: expiredInAccessToken,
     });
   },
-  signRtAndSaveRedis: async (user) => {
-    const userInfo = {
-      _id: user._id,
-      role: user.role,
-    };
+  signRtAndSaveDb: async (user) => {
     try {
-      const refreshToken = jwt.sign(userInfo, process.env.REFRESH_TOKEN_KEY, {
-        expiresIn: expiredInRefreshToken,
-      });
-
-      await clientRedis.set(
-        user._id.toString(),
-        refreshToken,
-        "PX",
-        exRefreshTokenRedis
+      const refreshToken = jwt.sign(
+        {
+          _id: user.id,
+          role: user.role,
+        },
+        process.env.REFRESH_TOKEN_KEY,
+        {
+          expiresIn: expiredInRefreshToken,
+        }
       );
+      await RefreshToken.create({
+        userId: user._id,
+        token: refreshToken,
+        expires: exRefreshTokenCookies,
+      });
 
       return refreshToken;
     } catch (error) {

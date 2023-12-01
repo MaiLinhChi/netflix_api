@@ -1,7 +1,7 @@
 module.exports = {
   roles: ["guest", "manager", "admin"],
   expiredInAccessToken: "2h",
-  expiredInRefreshToken: "60d",
-  exAccessTokenRedis: 1080000,
-  exRefreshTokenRedis: 777600000,
+  expiredInRefreshToken: "20d",
+  exAccessTokenCookies: 1080000,
+  exRefreshTokenCookies: 777600000,
 };

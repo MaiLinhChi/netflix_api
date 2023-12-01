@@ -1,5 +1,3 @@
-const { verifyRefreshToken } = require("../middlewares/verifyToken");
-
 module.exports = {
   home: async (req, res) => {
     res

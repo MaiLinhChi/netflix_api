@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
-
-const clientRedis = require("../utils/connect_redis");
+const createError = require("http-errors");
+// const clientRedis = require("../utils/connect_redis");
+const RefreshToken = require("../models/RefreshToken");
 
 const verifyAccessToken = (req, res, next) => {
   const authHeader = req.headers.token;
@@ -18,26 +19,28 @@ const verifyAccessToken = (req, res, next) => {
   }
 };
 
-const verifyRefreshToken = async (req, res) => {
-  const refreshToken = req.body.refreshToken;
-  if (!refreshToken) {
-    throw createError.BadRequest();
-  }
+const verifyAndDeleteRefreshToken = async (req, res) => {
   try {
-    const user = await jwt.verify(refreshToken, process.env.REFRESH_TOKEN_KEY);
-    const refreshTokenRedis = await clientRedis.get(user._id);
-    if (refreshTokenRedis && refreshToken === refreshTokenRedis) {
-      return user;
-    } else {
+    const refreshToken = req.body.refreshToken;
+    if (!refreshToken) {
       throw createError.Unauthorized();
     }
-  } catch (error) {
-    if (error.name === "TokenExpiredError") {
-      return res.status(401).json(error.message);
-    } else {
-      return res.status(500).json(error);
+
+    const user = jwt.verify(refreshToken, process.env.REFRESH_TOKEN_KEY);
+    const foundRefreshToken = await RefreshToken.findOne({
+      userId: user._id,
+      token: refreshToken,
+    });
+    if (!foundRefreshToken) {
+      throw createError.Unauthorized();
     }
+
+    await RefreshToken.findByIdAndDelete(foundRefreshToken._id);
+
+    return user;
+  } catch (error) {
+    throw error;
   }
 };
 
-module.exports = { verifyAccessToken, verifyRefreshToken };
+module.exports = { verifyAccessToken, verifyAndDeleteRefreshToken };

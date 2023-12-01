@@ -45,10 +45,12 @@ module.exports = {
         .cookie("access_token", "Bearer " + accessToken, {
           maxAge: exAccessTokenCookies,
           httpOnly: true,
+          secure: true,
         })
         .cookie("refresh_token", "Bearer " + refreshToken, {
           maxAge: exRefreshTokenCookies,
           httpOnly: true,
+          secure: true,
         })
         .json({ ...info, accessToken, refreshToken });
     } catch (error) {
@@ -65,10 +67,12 @@ module.exports = {
         .cookie("access_token", "Bearer " + newAccessToken, {
           maxAge: exAccessTokenCookies,
           httpOnly: true,
+          secure: true,
         })
         .cookie("refresh_token", "Bearer " + newRefreshToken, {
           maxAge: exRefreshTokenCookies,
           httpOnly: true,
+          secure: true,
         })
         .json({ newAccessToken, newRefreshToken });
     } catch (error) {

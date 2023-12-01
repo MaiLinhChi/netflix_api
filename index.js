@@ -25,7 +25,6 @@ routes(app);
 // Swagger
 var options = {
   customSiteTitle: "Netflix api",
-  customfavIcon: "./assets/favicon.ico",
 };
 app.use(
   "/documentation",

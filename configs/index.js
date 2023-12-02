@@ -2,10 +2,10 @@ const createError = require("http-errors");
 
 module.exports = {
   roles: ["guest", "manager", "admin"],
-  expiredInAccessToken: "2h",
-  expiredInRefreshToken: "20d",
-  exAccessTokenCookies: 1080000,
-  exRefreshTokenCookies: 777600000,
+  expiredInAccessToken: "3h",
+  expiredInRefreshToken: "30d",
+  exAccessTokenCookies: 10800000,
+  exRefreshTokenCookies: 2592000000,
   httpErrors: {
     objectId: () => createError(400, "Id is not valid"),
     existedFields: (fieldList) => {

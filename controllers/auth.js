@@ -52,7 +52,7 @@ module.exports = {
           httpOnly: true,
           secure: true,
         })
-        .json({ ...info, accessToken, refreshToken });
+        .json(info);
     } catch (error) {
       res.status(500).json(error);
     }
@@ -67,14 +67,14 @@ module.exports = {
         .cookie("access_token", "Bearer " + newAccessToken, {
           maxAge: exAccessTokenCookies,
           httpOnly: true,
-          secure: true,
+          // secure: true,
         })
         .cookie("refresh_token", "Bearer " + newRefreshToken, {
           maxAge: exRefreshTokenCookies,
           httpOnly: true,
-          secure: true,
+          // secure: true,
         })
-        .json({ newAccessToken, newRefreshToken });
+        .json("Refresh token successfully");
     } catch (error) {
       if (error.name === "TokenExpiredError") {
         return res.status(401).json(error);

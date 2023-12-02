@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const swaggerUi = require("swagger-ui-express");
+const cookieParser = require("cookie-parser");
 
 require("dotenv").config();
 
@@ -15,6 +16,7 @@ const swaggerDocument = require("./swagger");
 // Use middleware
 app.use(express.json());
 app.use(cors());
+app.use(cookieParser());
 
 // Connect DB
 connectDb();

@@ -4,10 +4,10 @@ const createError = require("http-errors");
 const RefreshToken = require("../models/RefreshToken");
 
 const verifyAccessToken = (req, res, next) => {
-  const authHeader = req.headers.token;
-  if (authHeader) {
-    const token = authHeader.split(" ")[1];
-    jwt.verify(token, process.env.ACCESS_TOKEN_KEY, (error, user) => {
+  const cookieAccessToken = req.cookies.access_token;
+  if (cookieAccessToken) {
+    const accessToken = cookieAccessToken.split(" ")[1];
+    jwt.verify(accessToken, process.env.ACCESS_TOKEN_KEY, (error, user) => {
       if (error) {
         return res.status(403).json("Token is not valid!!!");
       }

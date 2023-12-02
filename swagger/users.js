@@ -3,18 +3,6 @@ const usersSwagger = {
     get: {
       tags: ["Users"],
       description: "Get all users",
-      parameters: [
-        {
-          name: "token",
-          in: "header",
-          description: "Token to be passed as a header",
-          required: true,
-          schema: {
-            type: "string",
-          },
-          example: "Bearer ",
-        },
-      ],
       responses: {
         200: {
           description: "Get all users successfully",
@@ -29,18 +17,6 @@ const usersSwagger = {
     get: {
       tags: ["Users"],
       description: "Get all users by create at",
-      parameters: [
-        {
-          name: "token",
-          in: "header",
-          description: "Token to be passed as a header",
-          required: true,
-          schema: {
-            type: "string",
-          },
-          example: "Bearer ",
-        },
-      ],
       responses: {
         200: {
           description: "Get all users stats successfully",
@@ -56,16 +32,6 @@ const usersSwagger = {
       tags: ["Users"],
       description: "Find users by id",
       parameters: [
-        {
-          name: "token",
-          in: "header",
-          description: "Token to be passed as a header",
-          required: true,
-          schema: {
-            type: "string",
-          },
-          example: "Bearer ",
-        },
         {
           name: "id",
           in: "path",
@@ -90,18 +56,6 @@ const usersSwagger = {
     post: {
       tags: ["Users"],
       description: "Create user",
-      parameters: [
-        {
-          name: "token",
-          in: "header",
-          description: "Token to be passed as a header",
-          required: true,
-          schema: {
-            type: "string",
-          },
-          example: "Bearer ",
-        },
-      ],
       requestBody: {
         content: {
           "application/json": {
@@ -162,16 +116,6 @@ const usersSwagger = {
       tags: ["Users"],
       description: "Update user",
       parameters: [
-        {
-          name: "token",
-          in: "header",
-          description: "Token to be passed as a header",
-          required: true,
-          schema: {
-            type: "string",
-          },
-          example: "Bearer ",
-        },
         {
           name: "id",
           in: "path",
@@ -242,16 +186,6 @@ const usersSwagger = {
       tags: ["Users"],
       description: "Delete users by id",
       parameters: [
-        {
-          name: "token",
-          in: "header",
-          description: "Token to be passed as a header",
-          required: true,
-          schema: {
-            type: "string",
-          },
-          example: "Bearer ",
-        },
         {
           name: "id",
           in: "path",

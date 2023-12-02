@@ -67,12 +67,12 @@ module.exports = {
         .cookie("access_token", "Bearer " + newAccessToken, {
           maxAge: exAccessTokenCookies,
           httpOnly: true,
-          // secure: true,
+          secure: true,
         })
         .cookie("refresh_token", "Bearer " + newRefreshToken, {
           maxAge: exRefreshTokenCookies,
           httpOnly: true,
-          // secure: true,
+          secure: true,
         })
         .json("Refresh token successfully");
     } catch (error) {

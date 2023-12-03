@@ -6,7 +6,7 @@ const cookieParser = require("cookie-parser");
 require("dotenv").config();
 
 const app = express();
-const PORT = process.env.PORT || 8000;
+const PORT = 8000;
 
 const connectDb = require("./db/db");
 const routes = require("./routes");
@@ -14,9 +14,14 @@ const swaggerDocument = require("./swagger");
 // require("./utils/connect_redis");
 
 // Use middleware
-app.use(express.json());
-app.use(cors());
+app.use(
+  cors({
+    origin: process.env.CLIENT_URL,
+    credentials: true,
+  })
+);
 app.use(cookieParser());
+app.use(express.json());
 
 // Connect DB
 connectDb();

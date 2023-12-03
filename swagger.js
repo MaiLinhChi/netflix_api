@@ -16,11 +16,7 @@ const options = {
     },
     servers: [
       {
-        url: `${
-          process.env.ENVIRONMENT === "dev"
-            ? process.env.HOST + process.env.PORT
-            : process.env.URL
-        }`,
+        url: process.env.URL,
         description: process.env.ENVIRONMENT,
       },
     ],

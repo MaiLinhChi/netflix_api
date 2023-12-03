@@ -14,14 +14,7 @@ const swaggerDocument = require("./swagger");
 // require("./utils/connect_redis");
 
 // Use middleware
-app.use(
-  cors({
-    origin: "*",
-    methods: "*",
-    allowedHeaders: ["Content-Type", "Authorization"],
-    credentials: true,
-  })
-);
+app.use(cors());
 app.use(cookieParser());
 app.use(express.json());
 

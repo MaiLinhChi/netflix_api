@@ -42,17 +42,17 @@ module.exports = {
 
       res
         .status(200)
-        .cookie("access_token", "Bearer " + accessToken, {
-          maxAge: exAccessTokenCookies,
-          httpOnly: true,
-          secure: true,
-        })
-        .cookie("refresh_token", "Bearer " + refreshToken, {
-          maxAge: exRefreshTokenCookies,
-          httpOnly: true,
-          secure: true,
-        })
-        .json(info);
+        // .cookie("access_token", "Bearer " + accessToken, {
+        //   maxAge: exAccessTokenCookies,
+        //   httpOnly: true,
+        //   secure: true,
+        // })
+        // .cookie("refresh_token", "Bearer " + refreshToken, {
+        //   maxAge: exRefreshTokenCookies,
+        //   httpOnly: true,
+        //   secure: true,
+        // })
+        .json({ ...info, accessToken, refreshToken });
     } catch (error) {
       res.status(500).json(error);
     }
@@ -62,19 +62,21 @@ module.exports = {
       const user = await verifyAndDeleteRefreshToken(req, res);
       const newRefreshToken = await signRtAndSaveDb(user);
       const newAccessToken = signAccessToken(user);
-      return res
-        .status(200)
-        .cookie("access_token", "Bearer " + newAccessToken, {
-          maxAge: exAccessTokenCookies,
-          httpOnly: true,
-          secure: true,
-        })
-        .cookie("refresh_token", "Bearer " + newRefreshToken, {
-          maxAge: exRefreshTokenCookies,
-          httpOnly: true,
-          secure: true,
-        })
-        .json("Refresh token successfully");
+      return (
+        res
+          .status(200)
+          // .cookie("access_token", "Bearer " + newAccessToken, {
+          //   maxAge: exAccessTokenCookies,
+          //   httpOnly: true,
+          //   secure: true,
+          // })
+          // .cookie("refresh_token", "Bearer " + newRefreshToken, {
+          //   maxAge: exRefreshTokenCookies,
+          //   httpOnly: true,
+          //   secure: true,
+          // })
+          .json({ newAccessToken, newRefreshToken })
+      );
     } catch (error) {
       if (error.name === "TokenExpiredError") {
         return res.status(401).json(error);

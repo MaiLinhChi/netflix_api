@@ -3,6 +3,18 @@ const moviesSwagger = {
     get: {
       tags: ["Movies"],
       description: "Get all movies",
+      parameters: [
+        {
+          name: "token",
+          in: "header",
+          description: "Token to be passed as a header",
+          required: true,
+          schema: {
+            type: "string",
+          },
+          example: "Bearer ",
+        },
+      ],
       responses: {
         200: {
           description: "Get all movies successfully",
@@ -18,6 +30,16 @@ const moviesSwagger = {
       tags: ["Movies"],
       description: "Get suggest movies for you",
       parameters: [
+        {
+          name: "token",
+          in: "header",
+          description: "Token to be passed as a header",
+          required: true,
+          schema: {
+            type: "string",
+          },
+          example: "Bearer ",
+        },
         {
           name: "type",
           in: "query",
@@ -60,6 +82,16 @@ const moviesSwagger = {
       tags: ["Movies"],
       description: "Search for movie",
       parameters: [
+        {
+          name: "token",
+          in: "header",
+          description: "Token to be passed as a header",
+          required: true,
+          schema: {
+            type: "string",
+          },
+          example: "Bearer ",
+        },
         {
           name: "q",
           in: "query",
@@ -110,6 +142,16 @@ const moviesSwagger = {
       description: "Find movies by id",
       parameters: [
         {
+          name: "token",
+          in: "header",
+          description: "Token to be passed as a header",
+          required: true,
+          schema: {
+            type: "string",
+          },
+          example: "Bearer ",
+        },
+        {
           name: "id",
           in: "path",
           description: "Id of the movies",
@@ -133,6 +175,18 @@ const moviesSwagger = {
     post: {
       tags: ["Movies"],
       description: "Create movies",
+      parameters: [
+        {
+          name: "token",
+          in: "header",
+          description: "Token to be passed as a header",
+          required: true,
+          schema: {
+            type: "string",
+          },
+          example: "Bearer ",
+        },
+      ],
       requestBody: {
         content: {
           "application/json": {
@@ -238,6 +292,16 @@ const moviesSwagger = {
       description: "Update movies",
       parameters: [
         {
+          name: "token",
+          in: "header",
+          description: "Token to be passed as a header",
+          required: true,
+          schema: {
+            type: "string",
+          },
+          example: "Bearer ",
+        },
+        {
           name: "id",
           in: "path",
           description: "Id of movie",
@@ -335,6 +399,16 @@ const moviesSwagger = {
       tags: ["Movies"],
       description: "Delete movies by id",
       parameters: [
+        {
+          name: "token",
+          in: "header",
+          description: "Token to be passed as a header",
+          required: true,
+          schema: {
+            type: "string",
+          },
+          example: "Bearer ",
+        },
         {
           name: "id",
           in: "path",

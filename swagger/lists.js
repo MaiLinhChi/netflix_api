@@ -36,6 +36,18 @@ const listsSwagger = {
     post: {
       tags: ["Lists"],
       description: "Create lists",
+      parameters: [
+        {
+          name: "token",
+          in: "header",
+          description: "Token to be passed as a header",
+          required: true,
+          schema: {
+            type: "string",
+          },
+          example: "Bearer ",
+        },
+      ],
       requestBody: {
         content: {
           "application/json": {
@@ -85,6 +97,16 @@ const listsSwagger = {
       tags: ["Lists"],
       description: "Update lists",
       parameters: [
+        {
+          name: "token",
+          in: "header",
+          description: "Token to be passed as a header",
+          required: true,
+          schema: {
+            type: "string",
+          },
+          example: "Bearer ",
+        },
         {
           name: "id",
           in: "path",
@@ -143,6 +165,16 @@ const listsSwagger = {
       tags: ["Lists"],
       description: "Delete movies by id",
       parameters: [
+        {
+          name: "token",
+          in: "header",
+          description: "Token to be passed as a header",
+          required: true,
+          schema: {
+            type: "string",
+          },
+          example: "Bearer ",
+        },
         {
           name: "id",
           in: "path",

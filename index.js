@@ -16,7 +16,9 @@ const swaggerDocument = require("./swagger");
 // Use middleware
 app.use(
   cors({
-    origin: process.env.CLIENT_URL,
+    origin: "*",
+    methods: "*",
+    allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
   })
 );

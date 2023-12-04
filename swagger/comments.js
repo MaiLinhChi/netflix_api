@@ -37,7 +37,7 @@ const commentsSwagger = {
       description: "Create comments",
       parameters: [
         {
-          name: "token",
+          name: "authorization",
           in: "header",
           description: "Token to be passed as a header",
           required: true,
@@ -87,7 +87,7 @@ const commentsSwagger = {
       description: "Update comments",
       parameters: [
         {
-          name: "token",
+          name: "authorization",
           in: "header",
           description: "Token to be passed as a header",
           required: true,
@@ -145,7 +145,7 @@ const commentsSwagger = {
       description: "Delete comment by id",
       parameters: [
         {
-          name: "token",
+          name: "authorization",
           in: "header",
           description: "Token to be passed as a header",
           required: true,

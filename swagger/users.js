@@ -5,7 +5,7 @@ const usersSwagger = {
       description: "Get all users",
       parameters: [
         {
-          name: "token",
+          name: "authorization",
           in: "header",
           description: "Token to be passed as a header",
           required: true,
@@ -31,7 +31,7 @@ const usersSwagger = {
       description: "Get all users by create at",
       parameters: [
         {
-          name: "token",
+          name: "authorization",
           in: "header",
           description: "Token to be passed as a header",
           required: true,
@@ -57,7 +57,7 @@ const usersSwagger = {
       description: "Find users by id",
       parameters: [
         {
-          name: "token",
+          name: "authorization",
           in: "header",
           description: "Token to be passed as a header",
           required: true,
@@ -92,7 +92,7 @@ const usersSwagger = {
       description: "Create user",
       parameters: [
         {
-          name: "token",
+          name: "authorization",
           in: "header",
           description: "Token to be passed as a header",
           required: true,
@@ -163,7 +163,7 @@ const usersSwagger = {
       description: "Update user",
       parameters: [
         {
-          name: "token",
+          name: "authorization",
           in: "header",
           description: "Token to be passed as a header",
           required: true,
@@ -243,7 +243,7 @@ const usersSwagger = {
       description: "Delete users by id",
       parameters: [
         {
-          name: "token",
+          name: "authorization",
           in: "header",
           description: "Token to be passed as a header",
           required: true,

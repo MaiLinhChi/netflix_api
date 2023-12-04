@@ -12,7 +12,12 @@ const authorization = require("../middlewares/authorization");
 router.get("/", verifyAccessToken, Movies.getAll);
 
 // GET SUGGESTEDS
-router.get("/suggesteds", Validator(moviesSchema.suggest), Movies.suggest);
+router.get(
+  "/suggesteds",
+  verifyAccessToken,
+  Validator(moviesSchema.suggest),
+  Movies.suggest
+);
 
 // GET BY NAME
 router.get("/search", Validator(moviesSchema.search), Movies.search);

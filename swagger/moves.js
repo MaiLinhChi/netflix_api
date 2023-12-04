@@ -5,7 +5,7 @@ const moviesSwagger = {
       description: "Get all movies",
       parameters: [
         {
-          name: "token",
+          name: "authorization",
           in: "header",
           description: "Token to be passed as a header",
           required: true,
@@ -31,7 +31,7 @@ const moviesSwagger = {
       description: "Get suggest movies for you",
       parameters: [
         {
-          name: "token",
+          name: "authorization",
           in: "header",
           description: "Token to be passed as a header",
           required: true,
@@ -83,7 +83,7 @@ const moviesSwagger = {
       description: "Search for movie",
       parameters: [
         {
-          name: "token",
+          name: "authorization",
           in: "header",
           description: "Token to be passed as a header",
           required: true,
@@ -142,7 +142,7 @@ const moviesSwagger = {
       description: "Find movies by id",
       parameters: [
         {
-          name: "token",
+          name: "authorization",
           in: "header",
           description: "Token to be passed as a header",
           required: true,
@@ -177,7 +177,7 @@ const moviesSwagger = {
       description: "Create movies",
       parameters: [
         {
-          name: "token",
+          name: "authorization",
           in: "header",
           description: "Token to be passed as a header",
           required: true,
@@ -292,7 +292,7 @@ const moviesSwagger = {
       description: "Update movies",
       parameters: [
         {
-          name: "token",
+          name: "authorization",
           in: "header",
           description: "Token to be passed as a header",
           required: true,
@@ -400,7 +400,7 @@ const moviesSwagger = {
       description: "Delete movies by id",
       parameters: [
         {
-          name: "token",
+          name: "authorization",
           in: "header",
           description: "Token to be passed as a header",
           required: true,

@@ -4,6 +4,7 @@ const authSwagger = require("./swagger/auth");
 const usersSwagger = require("./swagger/users");
 const moviesSwagger = require("./swagger/moves");
 const listsSwagger = require("./swagger/lists");
+const commentsSwagger = require("./swagger/comments");
 const package = require("./package.json");
 
 const options = {
@@ -26,6 +27,7 @@ const options = {
       ...usersSwagger,
       ...moviesSwagger,
       ...listsSwagger,
+      ...commentsSwagger,
     },
   },
   apis: ["./routes/*.js"],

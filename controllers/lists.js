@@ -39,7 +39,7 @@ module.exports = {
   },
   update: async (req, res) => {
     try {
-      isObjectId(req.params.id);
+      isObjectId([req.params.id]);
       const listFields = ["title"];
       await checkDocumentExistWithFields(List, req.params.id, listFields, req);
       const updated = await List.findByIdAndUpdate(
@@ -58,7 +58,7 @@ module.exports = {
   },
   delete: async (req, res) => {
     try {
-      isObjectId(req.params.id);
+      isObjectId([req.params.id]);
       const deleted = await List.findByIdAndDelete(req.params.id);
       return deleted
         ? res.status(200).json(deleted)

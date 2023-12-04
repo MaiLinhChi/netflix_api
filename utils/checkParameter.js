@@ -11,8 +11,9 @@ module.exports = {
     });
     if (document) throw httpErrors.existedFields(fieldList);
   },
-  isObjectId: (id) => {
-    if (!ObjectID.isValid(id)) {
+  isObjectId: (arrayOfIDs) => {
+    const isValid = arrayOfIDs.every((id) => ObjectID.isValid(id));
+    if (!isValid) {
       throw httpErrors.objectId();
     }
   },

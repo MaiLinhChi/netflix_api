@@ -85,7 +85,7 @@ module.exports = {
   },
   update: async (req, res) => {
     try {
-      isObjectId(req.params.id);
+      isObjectId([req.params.id]);
       const updatedMovie = await Movie.findByIdAndUpdate(
         req.params.id,
         {
@@ -103,7 +103,7 @@ module.exports = {
   },
   delete: async (req, res) => {
     try {
-      isObjectId(req.params.id);
+      isObjectId([req.params.id]);
       const movieDeleted = await Movie.findByIdAndDelete(req.params.id);
       if (!movieDeleted) return res.status(404).json("Movie not found");
       return res.status(200).json(movieDeleted);

@@ -78,7 +78,7 @@ module.exports = {
 
   getById: async (req, res) => {
     try {
-      isObjectId(req.params.id);
+      isObjectId([req.params.id]);
       const user = await User.findById(req.params.id);
       if (!user) return res.status(404).json("User not found");
       const { password, ...info } = user._doc;
@@ -107,7 +107,7 @@ module.exports = {
   },
 
   updateById: async (req, res) => {
-    isObjectId(req.params.id);
+    isObjectId([req.params.id]);
     const fieldList = ["phone", "email"];
     await checkDocumentExistWithFields(User, req.params.id, fieldList, req);
 
@@ -135,7 +135,7 @@ module.exports = {
 
   deleteById: async (req, res) => {
     try {
-      isObjectId(req.params.id);
+      isObjectId([req.params.id]);
       const user = await User.findByIdAndDelete(req.params.id);
       if (!user) return res.status(404).json("User id not existed.");
       return res.status(200).json("User has been deleted...");

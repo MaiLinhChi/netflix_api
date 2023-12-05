@@ -19,7 +19,7 @@
     "express": "^4.17.2",
     "joi": "^17.11.0",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^6.2.1",
+    "mongoose": "^8.0.2",
     "redis": "^4.6.11",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.0"

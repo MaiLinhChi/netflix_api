@@ -4,7 +4,6 @@ const { exRefreshTokenCookies } = require("../configs");
 const RefreshToken = new mongoose.Schema(
   {
     token: { type: String, required: true, unique: true },
-    expires: { type: Number },
     userId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
@@ -12,8 +11,8 @@ const RefreshToken = new mongoose.Schema(
     },
     createdAt: {
       type: Date,
-      expires: exRefreshTokenCookies,
       default: Date.now,
+      expires: exRefreshTokenCookies,
     },
   },
   {

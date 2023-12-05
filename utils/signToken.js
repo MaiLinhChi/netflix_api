@@ -34,7 +34,6 @@ module.exports = {
       await RefreshToken.create({
         userId: user._id,
         token: refreshToken,
-        expires: exRefreshTokenCookies,
       });
 
       return refreshToken;

@@ -8,8 +8,10 @@ const verifyAccessToken = (req, res, next) => {
   if (headerAccessToken) {
     const accessToken = headerAccessToken.split(" ")[1];
     jwt.verify(accessToken, process.env.ACCESS_TOKEN_KEY, (error, user) => {
-      if (error) {
-        return res.status(403).json("Token is not valid!!!");
+      if (error?.name === "TokenExpiredError") {
+        return res.status(403).json(error.message);
+      } else if (error) {
+        return res.status(403).json(error);
       }
       req.user = user;
       next();

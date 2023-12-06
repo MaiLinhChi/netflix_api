@@ -4,9 +4,8 @@ const { isObjectId } = require("../utils/checkParameter");
 module.exports = {
   getCommentOfMovie: async (req, res) => {
     try {
-      isObjectId([req.query.userId, req.query.movieId]);
+      isObjectId([req.query.movieId]);
       const data = await Comment.find({
-        userId: req.query.userId,
         movieId: req.query.movieId,
       });
       return res.status(200).json(data);

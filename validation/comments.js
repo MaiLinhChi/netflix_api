@@ -1,7 +1,6 @@
 const Joi = require("joi");
 
 const getCommemtOfMovie = Joi.object({
-  userId: Joi.string().required(),
   movieId: Joi.string().required(),
 });
 
@@ -14,8 +13,6 @@ const create = Joi.object({
 const update = Joi.object({
   id: Joi.string().required(),
   comment: Joi.string().optional(),
-  userId: Joi.string().optional(),
-  movieId: Joi.string().optional(),
 });
 
 module.exports = {

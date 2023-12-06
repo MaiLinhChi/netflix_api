@@ -5,14 +5,6 @@ const commentsSwagger = {
       description: "Get all comments of movie",
       parameters: [
         {
-          name: "userId",
-          in: "query",
-          description: "Id of user",
-          schema: {
-            type: "string",
-          },
-        },
-        {
           name: "movieId",
           in: "query",
           description: "Id of movie",
@@ -114,14 +106,6 @@ const commentsSwagger = {
               properties: {
                 comment: {
                   description: "Comment of the user",
-                  type: "string",
-                },
-                userId: {
-                  description: "Id of the user",
-                  type: "string",
-                },
-                movieId: {
-                  description: "Id of the movie",
                   type: "string",
                 },
               },

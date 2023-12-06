@@ -20,8 +20,12 @@ module.exports = {
           process.env.SECRET_KEY
         ),
       });
+
+      const accessToken = signAccessToken(user);
+      const refreshToken = await signRtAndSaveDb(user);
+
       const { password, ...data } = user._doc;
-      res.status(201).json(data);
+      res.status(201).json({ ...data, accessToken, refreshToken });
     } catch (error) {
       res.status(error.status || 500).json(error);
     }

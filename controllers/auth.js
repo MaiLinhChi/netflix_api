@@ -4,6 +4,7 @@ const User = require("../models/User");
 const { signAccessToken, signRtAndSaveDb } = require("../utils/signToken");
 const { verifyAndDeleteRefreshToken } = require("../middlewares/verifyToken");
 const { checkDocumentExistWithFields } = require("../utils/checkParameter");
+const RefreshToken = require("../models/RefreshToken");
 
 module.exports = {
   register: async (req, res) => {
@@ -52,6 +53,15 @@ module.exports = {
         //   secure: true,
         // })
         .json({ ...info, accessToken, refreshToken });
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  },
+  logout: async (req, res) => {
+    try {
+      // check valid token and delete
+      await verifyAndDeleteRefreshToken(req);
+      res.status(200).json("Logout successfully");
     } catch (error) {
       res.status(500).json(error);
     }

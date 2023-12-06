@@ -11,6 +11,8 @@ router.post("/register", Validator(authSchema.register), Auth.register);
 
 router.post("/login", Validator(authSchema.login), Auth.login);
 
+router.delete("/logout", Auth.logout);
+
 router.post("/refresh_token", Auth.refreshToken);
 
 module.exports = router;

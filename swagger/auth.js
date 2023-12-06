@@ -108,6 +108,36 @@ const authSwagger = {
       },
     },
   },
+  "/auth/logout": {
+    delete: {
+      tags: ["Auth"],
+      description: "Logout for user",
+      requestBody: {
+        content: {
+          "application/json": {
+            schema: {
+              type: "object",
+              properties: {
+                refreshToken: {
+                  description: "Refresh token of the user",
+                  type: "string",
+                },
+              },
+              required: ["refreshToken"],
+            },
+          },
+        },
+      },
+      responses: {
+        200: {
+          description: "Logout successfully",
+          content: {
+            "application/json": {},
+          },
+        },
+      },
+    },
+  },
 };
 
 module.exports = authSwagger;

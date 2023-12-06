@@ -9,6 +9,7 @@ const RefreshToken = new mongoose.Schema(
       ref: "User",
       required: true,
     },
+    expire: { type: Number },
     createdAt: {
       type: Date,
       default: Date.now,

@@ -30,6 +30,7 @@ module.exports = {
       await RefreshToken.create({
         userId: user._id,
         token: refreshToken,
+        expire: expiredInRefreshToken,
       });
 
       return refreshToken;

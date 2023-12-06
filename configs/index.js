@@ -2,8 +2,8 @@ const createError = require("http-errors");
 
 module.exports = {
   roles: ["guest", "manager", "admin"],
-  expiredInAccessToken: "3h",
-  expiredInRefreshToken: "30d",
+  expiredInAccessToken: 10800,
+  expiredInRefreshToken: 2592000,
   exAccessTokenCookies: 60,
   exRefreshTokenCookies: 60 * 5,
   httpErrors: {

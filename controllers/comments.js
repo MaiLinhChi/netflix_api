@@ -7,7 +7,7 @@ module.exports = {
       isObjectId([req.query.movieId]);
       const data = await Comment.find({
         movieId: req.query.movieId,
-      });
+      }).populate({ path: "userId", select: ["name", "profilePicture"] });
       return res.status(200).json(data);
     } catch (error) {
       return res.status(error.status || 500).json(error);

@@ -1,4 +1,4 @@
-const ObjectID = require("mongodb").ObjectID;
+var mongodb = require("mongodb");
 const { httpErrors } = require("../configs");
 
 module.exports = {
@@ -12,7 +12,7 @@ module.exports = {
     if (document) throw httpErrors.existedFields(fieldList);
   },
   isObjectId: (arrayOfIDs) => {
-    const isValid = arrayOfIDs.every((id) => ObjectID.isValid(id));
+    const isValid = arrayOfIDs.every((id) => mongodb.ObjectId.isValid(id));
     if (!isValid) {
       throw httpErrors.objectId();
     }

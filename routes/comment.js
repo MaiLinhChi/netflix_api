@@ -9,7 +9,7 @@ const authorization = require("../middlewares/authorization");
 
 // GET
 router.get(
-  "/commemt-of-movie",
+  "/comment-of-movie",
   Validator(commentsSchema.getCommemtOfMovie),
   Comments.getCommentOfMovie
 );

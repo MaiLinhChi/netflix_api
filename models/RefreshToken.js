@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const { expiredInRefreshToken } = require("../configs");
+const { exRefreshTokenMillisecond } = require("../configs");
 
 const RefreshToken = new mongoose.Schema(
   {
@@ -9,11 +9,11 @@ const RefreshToken = new mongoose.Schema(
       ref: "User",
       required: true,
     },
-    expire: { type: Number },
+    expire: { type: String },
     createdAt: {
       type: Date,
       default: Date.now,
-      expires: expiredInRefreshToken,
+      expires: exRefreshTokenMillisecond,
     },
   },
   {

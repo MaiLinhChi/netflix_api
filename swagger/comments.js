@@ -1,5 +1,5 @@
 const commentsSwagger = {
-  "/comments/commemt-of-movie": {
+  "/comments/comment-of-movie": {
     get: {
       tags: ["Comments"],
       description: "Get all comments of movie",

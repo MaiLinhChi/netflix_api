@@ -1,11 +1,7 @@
 const jwt = require("jsonwebtoken");
 const createError = require("http-errors");
 
-const {
-  expiredInAccessToken,
-  expiredInRefreshToken,
-  exRefreshTokenCookies,
-} = require("../configs");
+const { expiredInAccessToken, expiredInRefreshToken } = require("../configs");
 const RefreshToken = require("../models/RefreshToken");
 // const clientRedis = require("../utils/connect_redis");
 

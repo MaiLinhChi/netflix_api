@@ -4,7 +4,6 @@ const User = require("../models/User");
 const { signAccessToken, signRtAndSaveDb } = require("../utils/signToken");
 const { verifyAndDeleteRefreshToken } = require("../middlewares/verifyToken");
 const { checkDocumentExistWithFields } = require("../utils/checkParameter");
-const { exRefreshTokenCookies, exAccessTokenCookies } = require("../configs");
 
 module.exports = {
   register: async (req, res) => {

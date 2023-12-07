@@ -18,6 +18,7 @@ const update = Joi.object({
   type: Joi.string().optional(),
   genre: Joi.array().items(Joi.string()).min(1).optional(),
   idMovies: Joi.array().items(Joi.string()).min(1).optional(),
+  updatedAt: Joi.string().required(),
 });
 
 module.exports = {

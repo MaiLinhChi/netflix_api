@@ -20,6 +20,7 @@ const update = Joi.object({
   address: Joi.string().min(3).optional(),
   profilePicture: Joi.string().optional(),
   role: Joi.string().valid("guest", "manager", "admin").optional(),
+  updatedAt: Joi.string().required(),
   password: Joi.string().min(6).max(30).optional(),
 });
 

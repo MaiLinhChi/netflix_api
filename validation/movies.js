@@ -47,6 +47,7 @@ const update = Joi.object({
   year: Joi.number().optional(),
   country: Joi.string().optional(),
   type: Joi.string().optional(),
+  updatedAt: Joi.string().required(),
 });
 
 module.exports = {

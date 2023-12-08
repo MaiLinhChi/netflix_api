@@ -5,6 +5,16 @@ const commentsSwagger = {
       description: "Get all comments of movie",
       parameters: [
         {
+          name: "token",
+          in: "header",
+          description: "Token to be passed as a header",
+          required: true,
+          schema: {
+            type: "string",
+          },
+          example: "Bearer ",
+        },
+        {
           name: "movieId",
           in: "query",
           description: "Id of movie",
@@ -29,7 +39,7 @@ const commentsSwagger = {
       description: "Create comments",
       parameters: [
         {
-          name: "authorization",
+          name: "token",
           in: "header",
           description: "Token to be passed as a header",
           required: true,
@@ -79,7 +89,7 @@ const commentsSwagger = {
       description: "Update comments",
       parameters: [
         {
-          name: "authorization",
+          name: "token",
           in: "header",
           description: "Token to be passed as a header",
           required: true,
@@ -129,7 +139,7 @@ const commentsSwagger = {
       description: "Delete comment by id",
       parameters: [
         {
-          name: "authorization",
+          name: "token",
           in: "header",
           description: "Token to be passed as a header",
           required: true,

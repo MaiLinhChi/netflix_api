@@ -5,6 +5,16 @@ const listsSwagger = {
       description: "Get all lists",
       parameters: [
         {
+          name: "token",
+          in: "header",
+          description: "Token to be passed as a header",
+          required: true,
+          schema: {
+            type: "string",
+          },
+          example: "Bearer ",
+        },
+        {
           name: "type",
           in: "query",
           description: "Type of movies",
@@ -38,7 +48,7 @@ const listsSwagger = {
       description: "Create lists",
       parameters: [
         {
-          name: "authorization",
+          name: "token",
           in: "header",
           description: "Token to be passed as a header",
           required: true,
@@ -98,7 +108,7 @@ const listsSwagger = {
       description: "Update lists",
       parameters: [
         {
-          name: "authorization",
+          name: "token",
           in: "header",
           description: "Token to be passed as a header",
           required: true,
@@ -166,7 +176,7 @@ const listsSwagger = {
       description: "Delete movies by id",
       parameters: [
         {
-          name: "authorization",
+          name: "token",
           in: "header",
           description: "Token to be passed as a header",
           required: true,

@@ -10,6 +10,7 @@ const authorization = require("../middlewares/authorization");
 // GET
 router.get(
   "/comment-of-movie",
+  verifyAccessToken,
   Validator(commentsSchema.getCommemtOfMovie),
   Comments.getCommentOfMovie
 );

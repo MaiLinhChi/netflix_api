@@ -40,10 +40,10 @@ module.exports = {
         {
           $project: {
             month: {
-              $month: "$createdAt",
+              $month: { $toDate: "$createdAt" },
             },
             year: {
-              $year: "$createdAt",
+              $year: { $toDate: "$createdAt" },
             },
           },
         },
@@ -64,7 +64,6 @@ module.exports = {
           },
         },
       ]).limit(5);
-
       const data = newUser.map((item) => ({
         month: MONTHS[item._id - 1],
         count: item.count,

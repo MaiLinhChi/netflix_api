@@ -2,9 +2,9 @@ module.exports = (validator) => {
   return async (req, res, next) => {
     try {
       const validated = await validator.validateAsync({
-        ...req.params,
-        ...req.query,
         ...req.body,
+        ...req.query,
+        ...req.params,
       });
       req.body = validated;
       next();

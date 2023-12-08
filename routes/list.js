@@ -8,7 +8,7 @@ const listsSchema = require("../validation/lists");
 const authorization = require("../middlewares/authorization");
 
 // GET
-router.get("/", Validator(listsSchema.getAll), Lists.getAll);
+router.get("/", verifyAccessToken, Validator(listsSchema.getAll), Lists.getAll);
 
 // CREATE
 router.post(

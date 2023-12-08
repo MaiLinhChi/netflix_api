@@ -4,7 +4,7 @@ const createError = require("http-errors");
 const RefreshToken = require("../models/RefreshToken");
 
 const verifyAccessToken = (req, res, next) => {
-  const headerAccessToken = req.headers.authorization;
+  const headerAccessToken = req.headers.token;
   if (headerAccessToken) {
     const accessToken = headerAccessToken.split(" ")[1];
     jwt.verify(accessToken, process.env.ACCESS_TOKEN_KEY, (error, user) => {

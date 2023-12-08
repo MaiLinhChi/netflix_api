@@ -5,7 +5,7 @@ const moviesSwagger = {
       description: "Get all movies",
       parameters: [
         {
-          name: "authorization",
+          name: "token",
           in: "header",
           description: "Token to be passed as a header",
           required: true,
@@ -31,7 +31,7 @@ const moviesSwagger = {
       description: "Get suggest movies for you",
       parameters: [
         {
-          name: "authorization",
+          name: "token",
           in: "header",
           description: "Token to be passed as a header",
           required: true,
@@ -83,7 +83,7 @@ const moviesSwagger = {
       description: "Search for movie",
       parameters: [
         {
-          name: "authorization",
+          name: "token",
           in: "header",
           description: "Token to be passed as a header",
           required: true,
@@ -118,6 +118,16 @@ const moviesSwagger = {
       description: "Get random movies",
       parameters: [
         {
+          name: "token",
+          in: "header",
+          description: "Token to be passed as a header",
+          required: true,
+          schema: {
+            type: "string",
+          },
+          example: "Bearer ",
+        },
+        {
           name: "type",
           in: "query",
           description: "Type of movie",
@@ -142,7 +152,7 @@ const moviesSwagger = {
       description: "Find movies by id",
       parameters: [
         {
-          name: "authorization",
+          name: "token",
           in: "header",
           description: "Token to be passed as a header",
           required: true,
@@ -177,7 +187,7 @@ const moviesSwagger = {
       description: "Create movies",
       parameters: [
         {
-          name: "authorization",
+          name: "token",
           in: "header",
           description: "Token to be passed as a header",
           required: true,
@@ -292,7 +302,7 @@ const moviesSwagger = {
       description: "Update movies",
       parameters: [
         {
-          name: "authorization",
+          name: "token",
           in: "header",
           description: "Token to be passed as a header",
           required: true,
@@ -400,7 +410,7 @@ const moviesSwagger = {
       description: "Delete movies by id",
       parameters: [
         {
-          name: "authorization",
+          name: "token",
           in: "header",
           description: "Token to be passed as a header",
           required: true,

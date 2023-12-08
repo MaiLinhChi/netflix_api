@@ -20,13 +20,23 @@ router.get(
 );
 
 // GET BY NAME
-router.get("/search", Validator(moviesSchema.search), Movies.search);
+router.get(
+  "/search",
+  verifyAccessToken,
+  Validator(moviesSchema.search),
+  Movies.search
+);
 
 // GET
-router.get("/find/:id", Movies.findById);
+router.get("/find/:id", verifyAccessToken, Movies.findById);
 
 // GET RANDOM
-router.get("/random", Validator(moviesSchema.random), Movies.random);
+router.get(
+  "/random",
+  verifyAccessToken,
+  Validator(moviesSchema.random),
+  Movies.random
+);
 
 // CREATE
 router.post(

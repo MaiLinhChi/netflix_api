@@ -4,7 +4,6 @@ const User = require("../models/User");
 const { signAccessToken, signRtAndSaveDb } = require("../utils/signToken");
 const { verifyAndDeleteRefreshToken } = require("../middlewares/verifyToken");
 const { checkDocumentExistWithFields } = require("../utils/checkParameter");
-const RefreshToken = require("../models/RefreshToken");
 
 module.exports = {
   register: async (req, res) => {
@@ -72,7 +71,7 @@ module.exports = {
   },
   refreshToken: async (req, res) => {
     try {
-      const user = await verifyAndDeleteRefreshToken(req, res);
+      const user = await verifyAndDeleteRefreshToken(req);
       const newRefreshToken = await signRtAndSaveDb(user);
       const newAccessToken = signAccessToken(user);
       return (

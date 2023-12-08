@@ -21,13 +21,12 @@ const verifyAccessToken = (req, res, next) => {
   }
 };
 
-const verifyAndDeleteRefreshToken = async (req, res) => {
+const verifyAndDeleteRefreshToken = async (req) => {
   try {
     const refreshToken = req.body.refreshToken;
     if (!refreshToken) {
       throw createError.Unauthorized();
     }
-
     const user = jwt.verify(refreshToken, process.env.REFRESH_TOKEN_KEY);
     const foundRefreshToken = await RefreshToken.findOne({
       userId: user._id,
@@ -36,9 +35,7 @@ const verifyAndDeleteRefreshToken = async (req, res) => {
     if (!foundRefreshToken) {
       throw createError.Unauthorized();
     }
-
     await RefreshToken.findByIdAndDelete(foundRefreshToken._id);
-
     return user;
   } catch (error) {
     throw error;

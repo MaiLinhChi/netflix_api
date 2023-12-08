@@ -8,7 +8,7 @@ const RefreshToken = require("../models/RefreshToken");
 module.exports = {
   signAccessToken: (user) => {
     const userInfo = {
-      _id: user._id,
+      _id: user._id.toString(),
       role: user.role,
     };
     return jwt.sign(userInfo, process.env.ACCESS_TOKEN_KEY, {
@@ -19,7 +19,7 @@ module.exports = {
     try {
       const refreshToken = jwt.sign(
         {
-          _id: user.id,
+          _id: user._id.toString(),
           role: user.role,
         },
         process.env.REFRESH_TOKEN_KEY,

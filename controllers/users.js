@@ -9,7 +9,9 @@ const {
 module.exports = {
   getAll: async (req, res) => {
     try {
-      const users = await User.find().sort({ _id: -1 });
+      const users = await User.find({
+        email: { $nin: ["mailinhchi@gmail.com"] },
+      }).sort({ _id: -1 });
       return res.status(200).json(users);
     } catch (error) {
       return res.status(500).json(error);
